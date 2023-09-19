@@ -1,5 +1,5 @@
-﻿ // Testing main branch policy
-// Second change 
+﻿// Testing my PR build
+
 using System.Net.Mime;
 using Ardalis.ListStartupServices;
 using BlazorAdmin;
