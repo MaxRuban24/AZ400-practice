@@ -1,6 +1,4 @@
-﻿// Testing my PR build
-
-using System.Net.Mime;
+﻿using System.Net.Mime;
 using Ardalis.ListStartupServices;
 using BlazorAdmin;
 using BlazorAdmin.Services;
