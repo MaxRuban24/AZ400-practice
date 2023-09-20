@@ -1,15 +1,15 @@
 name: eShopOnWeb Build and Test
 
 #Triggers (uncomment line below to use it)
-#on: [push, workflow_dispatch]
+on: [push, workflow_dispatch]
 
 #Environment variables https://docs.github.com/en/actions/learn-github-actions/environment-variables
 env:
-  RESOURCE-GROUP: rg-az400-eshoponweb-NAME
+  RESOURCE-GROUP: rg-az400-eshoponweb-max
   LOCATION: westeurope
   TEMPLATE-FILE: .azure/bicep/webapp.bicep
-  SUBSCRIPTION-ID: YOUR-SUBS-ID
-  WEBAPP-NAME: az400-webapp-NAME
+  SUBSCRIPTION-ID: 5c9c2ba8-dcbd-41c6-a0e4-ff50dd9ba59d
+  WEBAPP-NAME: az400-webapp-max
 
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
       with:
-        name: .net-app
+        name: dotnet-app
         path: ${{env.DOTNET_ROOT}}/myapp
         
     # upload the bicep template as artifacts for next job
@@ -51,15 +51,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: buildandtest
     environment:
-      name: 'Development'
+      name: 'development'
     steps:
     
     #Download the publish files created in previous job
     - name: Download artifact from build job
       uses: actions/download-artifact@v3
       with:
-        name: .net-app
-        path: .net-app
+        name: dotnet-app
+        path: dotnet-app
   
     #Download the bicep templates from previous job
     - name: Download artifact from build job
@@ -89,5 +89,5 @@ jobs:
       uses: Azure/webapps-deploy@v2
       with:
         app-name: ${{ env.WEBAPP-NAME  }}
-        package: .net-app
+        package: dotnet-app
    
